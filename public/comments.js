@@ -122,11 +122,19 @@ function saveComments(comment) {
 }
 
 export function restoreComments(commentsObject) {
-    let commentsArr = Object.values(commentsObject);
-    commentsArr.forEach(comment => {
-        return createComment(comment);
+    //  let commentsObj = JSON.parse(commentsObject);
+    //  let commentsArr = Object.values(commentsObj);/
+    // //let commentsArr = Object.values(commentsObject);
+    // commentsArr.forEach(comment => {
+    //     return createComment(comment);
+    // })
+    let obj = JSON.parse(commentsObject)
+    let arr = Object.values(obj)
+    arr.forEach(text => {
+        createComment(text.toString())
     })
 
-    // let commentsObj = JSON.parse(commentsObject);
-    // let commentsArr = Object.values(commentsObj);
+
+
 }
+
