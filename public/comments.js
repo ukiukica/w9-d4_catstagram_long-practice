@@ -111,10 +111,22 @@ export const resetComments = () => {
     Array.from(comments.children).forEach(child => child.remove());
 };
 let commNum = 1;
+let commentObj = {};
 
 function saveComments(comment) {
     let commentKey = `comment ${commNum}`;
-    localStorage.setItem(commentKey, comment.innerText);
+    commentObj[commentKey] = comment.innerText;
+    localStorage.setItem('comments', JSON.stringify(commentObj));
     commNum += 1;
     return commNum;
+}
+
+export function restoreComments(commentsObject) {
+    let commentsArr = Object.values(commentsObject);
+    commentsArr.forEach(comment => {
+        return createComment(comment);
+    })
+
+    // let commentsObj = JSON.parse(commentsObject);
+    // let commentsArr = Object.values(commentsObj);
 }

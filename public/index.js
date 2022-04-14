@@ -1,6 +1,7 @@
 import { createMainContent } from './main.js';
 import { createScoreContainer } from './score.js';
-import { createCommentSection } from './comments.js';
+import { createCommentSection, restoreComments } from './comments.js';
+
 
 const initializePage = () => {
     // Create container
@@ -22,5 +23,10 @@ window.onload = () => {
     createMainContent();
     createScoreContainer();
     createCommentSection();
+
+    const storeComments = localStorage.getItem('comments');
+    if (storeComments) {
+        restoreComments(storeComments)
+    }
 
 };
