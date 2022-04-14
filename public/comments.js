@@ -101,6 +101,8 @@ const createComment = (commentText) => {
     newCommentContainer.appendChild(deleteButton);
     const comments = document.querySelector(".comments");
     comments.appendChild(newCommentContainer);
+
+    saveComments(newComment)
 };
 
 
@@ -108,3 +110,11 @@ export const resetComments = () => {
     const comments = document.querySelector(".comments");
     Array.from(comments.children).forEach(child => child.remove());
 };
+let commNum = 1;
+
+function saveComments(comment) {
+    let commentKey = `comment ${commNum}`;
+    localStorage.setItem(commentKey, comment.innerText);
+    commNum += 1;
+    return commNum;
+}
