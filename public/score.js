@@ -65,7 +65,8 @@ const vote = e => {
     } else {
         newScore = parseInt(newScore) - 1;
     }
-    
+    localStorage.setItem('count', newScore)
+
     // update score
     updateScore(newScore);
 };
@@ -78,4 +79,6 @@ export const resetScore = () => {
 const updateScore = (newScore) => {
     const score = document.querySelector('.score');
     score.innerText = newScore;
+    // let localCount = localStorage.getItem('count');
+    // localCount.value = newScore
 };

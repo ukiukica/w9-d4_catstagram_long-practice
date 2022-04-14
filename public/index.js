@@ -12,10 +12,15 @@ const initializePage = () => {
     container.style.marginTop = "20px";
     document.body.appendChild(container);
 };
+// const storeCount = (count) => {
+//     localStorage.setItem('countVar', count)
+// }
 
 window.onload = () => {
+
     initializePage();
     createMainContent();
     createScoreContainer();
     createCommentSection();
+
 };
