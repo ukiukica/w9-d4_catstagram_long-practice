@@ -1,6 +1,7 @@
 import { resetScore } from './score.js';
 import { resetComments } from './comments.js';
 
+let kittenImgUrl;
 export const createMainContent = () => {
     // Create h1
     const h1 = document.createElement("h1");
@@ -8,6 +9,7 @@ export const createMainContent = () => {
 
     // Create img
     const img = document.createElement("img");
+    img.setAttribute('id', 'catImage')
     img.style.margin = "20px";
     img.style.maxWidth = "750px";
 
@@ -18,9 +20,19 @@ export const createMainContent = () => {
     container.append(newKittenBtn);
     container.appendChild(img);
 
-    fetchImage();
-};
+    // check if stored
+    let localURL = localStorage.getItem('url')
+    if(localURL) {
+        img.src = localURL
+    }else {
 
+        fetchImage();
+    }
+    
+
+
+
+};
 const fetchImage = async () => {
     // Fetch image from API and set img url
     try {
@@ -28,18 +40,22 @@ const fetchImage = async () => {
         // Converts to JSON
         const kittenData = await kittenResponse.json();
         // console.log(kittenData);
-        const kittenImgUrl = kittenData[0].url;
+         kittenImgUrl = kittenData[0].url;
         const kittenImg = document.querySelector("img");
         kittenImg.src = kittenImgUrl;
+
 
         // After the image is finished loading, reset the score and comments
         kittenImg.addEventListener('load', () => {
             resetScore();
             resetComments();
+            //
         });
+        localStorage.setItem("url", kittenImgUrl)
     } catch (e) {
         console.log("Failed to fetch image", e);
     }
+
 };
 
 const createNewKittenBtn = () => {

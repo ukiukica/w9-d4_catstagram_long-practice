@@ -27,7 +27,12 @@ const createScoreDisplay = () => {
 
     const score = document.createElement("span");
     score.className = "score";
-    score.innerText = "0";
+    let wth = localStorage.getItem('count')
+    if(wth) {
+        score.innerText = wth;
+    } else {
+         score.innerText = "0";
+    }
 
     scoreDisplay.appendChild(scoreTitle);
     scoreDisplay.appendChild(score);
@@ -65,6 +70,7 @@ const vote = e => {
     } else {
         newScore = parseInt(newScore) - 1;
     }
+
     localStorage.setItem('count', newScore)
 
     // update score
